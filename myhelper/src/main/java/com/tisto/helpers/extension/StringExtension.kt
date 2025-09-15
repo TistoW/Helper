@@ -283,7 +283,7 @@ fun String?.formatCurrency(showCurrency: Boolean = false): String {
     return this.toDoubleSafety().formatCurrency(showCurrency)
 }
 
-fun Int?.toRupiah(hideCurrency: Boolean = false): String {
+fun Int?.formatRupiah(hideCurrency: Boolean = false): String {
     return (this ?: 0).formatCurrency(!hideCurrency)
 }
 
