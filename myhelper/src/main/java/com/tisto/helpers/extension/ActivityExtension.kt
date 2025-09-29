@@ -22,6 +22,7 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.tisto.helpers.util.AppConstants
 import java.util.Observable
 import java.util.concurrent.ExecutionException
 import kotlin.math.roundToInt
@@ -160,6 +161,20 @@ fun Activity.sendResult(value: String? = null, name: String = "extra") {
     setResult(Activity.RESULT_OK, intent)
 }
 
+inline fun <reified T : Any> Activity.extra(key: String = AppConstants.EXTRA, default: T? = null) =
+    lazy {
+        val value = intent?.extras?.get(key)
+        if (value is T) value else default
+    }
+
+inline fun <reified T : Any> Activity.getExtra(
+    key: String = AppConstants.EXTRA,
+    default: T? = null
+) = lazy {
+    val value = intent?.extras?.get(key)
+    if (value is T) value else default
+}
+
 fun Activity.getRootView(): View {
     return findViewById(android.R.id.content)
 }
@@ -240,6 +255,34 @@ class MenuImage(
     var name: String,
     @DrawableRes var image: Int
 )
+
+@SuppressLint("RestrictedApi")
+fun Activity.popUpMenuImage(view: View, list: List<MenuImage>, onClicked: (String) -> Unit) {
+    val popupMenu = PopupMenu(this, view)
+    list.forEach {
+        popupMenu.menu.add(it.name).icon = AppCompatResources.getDrawable(this, it.image)
+    }
+    if (popupMenu.menu is MenuBuilder) {
+        val menuBuilder = popupMenu.menu as MenuBuilder
+        menuBuilder.setOptionalIconsVisible(true)
+        for (item in menuBuilder.visibleItems) {
+            val iconMarginPx = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                AppConstants.ICON_MARGIN.toFloat(),
+                resources.displayMetrics
+            ).toInt()
+            if (item.icon != null) {
+                item.icon = InsetDrawable(item.icon, iconMarginPx, 0, iconMarginPx, 0)
+            }
+        }
+    }
+    popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
+        onClicked.invoke(it.toString())
+        return@OnMenuItemClickListener true
+    })
+
+    popupMenu.show()
+}
 
 fun Activity.imagePicker(
     width: Int = 1080,

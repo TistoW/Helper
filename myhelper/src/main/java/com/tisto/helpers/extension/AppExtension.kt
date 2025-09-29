@@ -23,7 +23,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
@@ -33,6 +32,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.tisto.helpers.R
+import com.tisto.helpers.util.AppConstants.TIME_STAMP_FORMAT
 import java.net.URL
 import java.net.URLEncoder
 import java.text.ParseException
@@ -308,7 +308,7 @@ fun Context.popUpMenu(view: View, list: List<String>, onClicked: (String) -> Uni
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun LocalDateTime.toTimeStamp(format: String = ""): String {
+fun LocalDateTime.toTimeStamp(format: String = TIME_STAMP_FORMAT): String {
     return DateTimeFormatter.ofPattern(format).format(this)
 }
 
@@ -326,7 +326,6 @@ fun delayFunction(r: Runnable, duration: Long = 300) {
     Handler(Looper.getMainLooper()).postDelayed(r, duration)
 }
 
-@RequiresPermission("android.permission.READ_PRIVILEGED_PHONE_STATE")
 @SuppressLint("HardwareIds")
 fun Context.getImei(): String {
 
@@ -425,22 +424,18 @@ fun <T> T.toMap(): Map<String, String> {
     return Gson().fromJson(this.toJson(), map.javaClass)
 }
 
-@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
 fun Context.isOffline(): Boolean {
     return !isOnline()
 }
 
-@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
 fun Fragment.isOffline(): Boolean {
     return !requireActivity().isOnline()
 }
 
-@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
 fun Fragment.isOnline(): Boolean {
     return requireActivity().isOnline()
 }
 
-@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
 fun Context.isOnline(): Boolean {
     val context = this
     val connectivityManager =

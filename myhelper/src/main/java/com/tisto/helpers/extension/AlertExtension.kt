@@ -72,6 +72,15 @@ fun Context.showInfoDialog(title: String, pesan: String, onConfirmClickListener:
         .show()
 }
 
+fun AppCompatActivity.showWarningConfirmAlert(
+    title: String,
+    message: String,
+    onConfirmClickListener: () -> Unit
+) {
+    showConfirmDialog(title, message, onAction = onConfirmClickListener)
+}
+
+
 fun Fragment.showSuccessDialog(message: String, onConfirmClickListener: () -> Unit) {
     requireActivity().showSuccessDialog(message, onConfirmClickListener)
 }
