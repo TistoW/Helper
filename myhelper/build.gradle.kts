@@ -68,4 +68,8 @@ dependencies {
 
     // PermissionsManager
     implementation(libs.dexter)
+
+    //Pixele
+    implementation(libs.sdp.android)
+    implementation(libs.ssp.android)
 }
