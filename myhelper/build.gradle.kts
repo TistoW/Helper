@@ -30,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -40,4 +44,28 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //swiperefreshlayout
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // printer bluetooth thermal
+    implementation(libs.escpos.thermalprinter.android)
+
+    // Image picker
+    implementation(libs.imagepicker)
+
+    //Sweet Alert
+    implementation(libs.library)
+    implementation(libs.motiontoast)
+
+    implementation(libs.okhttp)
+    implementation(libs.retrofit)
+    implementation(libs.logging.interceptor)
+    implementation(libs.gson)
+
+    // glide
+    implementation(libs.glide)
+
+    // PermissionsManager
+    implementation(libs.dexter)
 }
