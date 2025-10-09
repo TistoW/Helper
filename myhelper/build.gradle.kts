@@ -56,7 +56,9 @@ dependencies {
 
     //Sweet Alert
     implementation(libs.library)
-    implementation(libs.motiontoast)
+    implementation(libs.motiontoast) {
+        exclude("org.jetbrains.kotlin", "kotlin-android-extensions-runtime")
+    }
 
     implementation(libs.okhttp)
     implementation(libs.retrofit)
