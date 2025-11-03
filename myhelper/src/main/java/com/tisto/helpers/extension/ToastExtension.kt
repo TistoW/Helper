@@ -6,56 +6,75 @@ import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.tisto.helpers.R
-import www.sanju.motiontoast.MotionToast
+import es.dmoral.toasty.Toasty
+
+//import www.sanju.motiontoast.MotionToast
 
 fun Context.toastSimple(message: String?) {
     Toast.makeText(this, message?:"Message", Toast.LENGTH_SHORT).show()
 }
 
+//fun Activity.toastSuccess(message: String?) {
+//    MotionToast.darkToast(
+//        this,
+//        "Success",
+//        message?:"Message",
+//        MotionToast.TOAST_SUCCESS,
+//        MotionToast.GRAVITY_BOTTOM,
+//        MotionToast.LONG_DURATION,
+//        ResourcesCompat.getFont(this, R.font.worksans_regular)
+//    )
+//}
+//
+//fun Activity.toastInfo(message: String?) {
+//    MotionToast.darkToast(
+//        this,
+//        "Info",
+//        message?:"Message",
+//        MotionToast.TOAST_INFO,
+//        MotionToast.GRAVITY_BOTTOM,
+//        MotionToast.LONG_DURATION,
+//        ResourcesCompat.getFont(this, R.font.worksans_regular))
+//}
+//
+//fun Activity.toastWarning(message: String?) {
+//    MotionToast.darkToast(
+//        this,
+//        "Warning",
+//        message?:"Message",
+//        MotionToast.TOAST_WARNING,
+//        MotionToast.GRAVITY_BOTTOM,
+//        MotionToast.LONG_DURATION,
+//        ResourcesCompat.getFont(this, R.font.worksans_regular))
+//}
+//
+//fun Activity.toastError(message: String?) {
+//    MotionToast.darkToast(
+//        this,
+//        "Error",
+//        message?:"Message",
+//        MotionToast.TOAST_ERROR,
+//        MotionToast.GRAVITY_BOTTOM,
+//        MotionToast.LONG_DURATION,
+//        ResourcesCompat.getFont(this, R.font.worksans_regular))
+//}
+
 fun Activity.toastSuccess(message: String?) {
-    MotionToast.darkToast(
-        this,
-        "Success",
-        message?:"Message",
-        MotionToast.TOAST_SUCCESS,
-        MotionToast.GRAVITY_BOTTOM,
-        MotionToast.LONG_DURATION,
-        ResourcesCompat.getFont(this, R.font.worksans_regular)
-    )
+    Toasty.success(this, message.def(), Toast.LENGTH_SHORT, true).show();
 }
 
 fun Activity.toastInfo(message: String?) {
-    MotionToast.darkToast(
-        this,
-        "Info",
-        message?:"Message",
-        MotionToast.TOAST_INFO,
-        MotionToast.GRAVITY_BOTTOM,
-        MotionToast.LONG_DURATION,
-        ResourcesCompat.getFont(this, R.font.worksans_regular))
+    Toasty.info(this, message.def(), Toast.LENGTH_SHORT, true).show();
 }
 
 fun Activity.toastWarning(message: String?) {
-    MotionToast.darkToast(
-        this,
-        "Warning",
-        message?:"Message",
-        MotionToast.TOAST_WARNING,
-        MotionToast.GRAVITY_BOTTOM,
-        MotionToast.LONG_DURATION,
-        ResourcesCompat.getFont(this, R.font.worksans_regular))
+    Toasty.warning(this, message.def(), Toast.LENGTH_SHORT, true).show();
 }
 
 fun Activity.toastError(message: String?) {
-    MotionToast.darkToast(
-        this,
-        "Error",
-        message?:"Message",
-        MotionToast.TOAST_ERROR,
-        MotionToast.GRAVITY_BOTTOM,
-        MotionToast.LONG_DURATION,
-        ResourcesCompat.getFont(this, R.font.worksans_regular))
+    Toasty.error(this, message.def(), Toast.LENGTH_SHORT, true).show();
 }
+
 
 fun Fragment.toastSuccess(message: String?){
     requireActivity().toastSuccess(message)
